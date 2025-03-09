@@ -5,6 +5,7 @@ import { LoginComponent } from './app/pages/login/login.component';
 import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
 
+
 bootstrapApplication(LoginComponent,{
   providers: [provideRouter(routes)]
 }).catch((err) => console.error(err));
