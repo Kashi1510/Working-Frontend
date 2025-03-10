@@ -1,11 +1,38 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  loginForm: FormGroup;
+  submitted = false;
 
+  constructor(private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.loginForm.controls;
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    
+    if (this.loginForm.invalid) {
+      return;
+    }
+    
+    console.log('Form Submitted Successfully!', this.loginForm.value);
+    alert('Login successful!');
+  }
+  
 }

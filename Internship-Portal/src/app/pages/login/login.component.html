@@ -1,11 +1,45 @@
-<!-- <p>login works!</p> -->
 <div class="login-container">
-    <h2>Login</h2>
-    <form>
-        <input type ="text" placeholder="Email"/>
-        <input type ="password" placeholder="password"/>
-        <button type="submit">Login</button>
-
-    </form>
-    <p>Don't have an account? <a routerLink="/signup">Signup</a></p>
-</div>
+    <div class="login-box">
+      
+      <!-- Logo -->
+      <div class="logo">
+        <img src="" alt="">
+      </div>
+  
+      <h2>Login to InternAspire</h2>
+  
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+        
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" formControlName="email" placeholder="Enter your email">
+          <div *ngIf="submitted && f['email'].errors" class="error-message">
+            <small *ngIf="f['email'].errors['required']">Email is required.</small>
+            <small *ngIf="f['email'].errors['email']">Enter a valid email.</small>
+          </div>
+        </div>
+  
+        <!-- Password Field -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" formControlName="password" placeholder="Enter your password">
+          <div *ngIf="submitted && f['password'].errors" class="error-message">
+            <small *ngIf="f['password'].errors['required']">Password is required.</small>
+            <small *ngIf="f['password'].errors['minlength']">Password must be at least 6 characters.</small>
+          </div>
+        </div>
+  
+        <!-- Submit Button -->
+        <button type="submit" class="login-btn">Login</button>
+  
+        <!-- Additional Links -->
+        <div class="extra-links">
+          <a href="#">Forgot Password?</a>
+          <a href="#">New User? Register</a>
+        </div>
+  
+      </form>
+    </div>
+  </div>
+  
