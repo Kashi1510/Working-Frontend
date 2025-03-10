@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 
 interface User {
   firstName: string;
   lastName: string;
   email: string;
+  password: string;
+  ConfirmPassword: string;
   sslcPercentage: string;
   pucPercentage: string;
   degreeCgpa: string;
@@ -13,7 +16,7 @@ interface User {
 }
 @Component({
   selector: 'app-signup',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule, RouterModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
@@ -23,6 +26,8 @@ export class SignupComponent {
     firstName: '',
     lastName: '',
     email: '',
+    password:'',
+    ConfirmPassword:'',
     sslcPercentage: '',
     pucPercentage: '',
     degreeCgpa: '',
@@ -30,20 +35,26 @@ export class SignupComponent {
   };
 
   onSubmit(form: NgForm) {
+  
     if (form.valid) {
       
       this.user = {
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@example.com',
-        sslcPercentage: '85%',
-        pucPercentage: '90%',
-        degreeCgpa: '8.5',
-        skills: 'JavaScript, Angular, TypeScript'
+        firstName: '',
+        lastName: '',
+        email: '',
+        password:'',
+        ConfirmPassword:'',
+        sslcPercentage: '',
+        pucPercentage: '',
+        degreeCgpa: '',
+        skills: ''
       };
+      console.log("Form Submitted",this.user);
+      
+      
 
-      // Reset the form
-      form.resetForm();
+      // // Reset the form
+      // form.resetForm();
     }
   
    
