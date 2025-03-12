@@ -1,1 +1,46 @@
-<p>employer-dashboard works!</p>
+
+ 
+<div class="container">
+    <h2>Company Dashboard</h2>
+  
+  
+    <!-- <form (submit)="postInternship()" class="mb-4">
+      <div class="mb-3">
+        <input type="text" [(ngModel)]="internship.title" class="form-control" placeholder="Internship Title" required />
+      </div>
+      <div class="mb-3">
+        <input type="text" [(ngModel)]="internship.company" class="form-control" placeholder="Company Name" required />
+      </div>
+      <div class="mb-3">
+        <textarea [(ngModel)]="internship.description" class="form-control" placeholder="Description" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Post Internship</button>
+    </form> -->
+    <form (submit)="postInternship()" class="mb-4">
+      <div class="mb-3">
+        <input type="text" [(ngModel)]="internship.title" name="title" class="form-control" placeholder="Internship Title" required />
+      </div>
+      <div class="mb-3">
+        <input type="text" [(ngModel)]="internship.company" name="company" class="form-control" placeholder="Company Name" required />
+      </div>
+      <div class="mb-3">
+        <textarea [(ngModel)]="internship.description" name="description" class="form-control" placeholder="Description" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Post Internship</button>
+    </form>
+    
+  
+  
+    <div *ngFor="let job of internships" class="card mb-3">
+      <div class="card-body">
+        <h5>{{ job.title }} - {{ job.company }}</h5>
+        <p>{{ job.description }}</p>
+  
+        <button class="btn btn-info" (click)="getApplicants(job.id)">View Applicants</button>
+  
+        <ul *ngIf="selectedInternship === job.id">
+          <li *ngFor="let applicant of applicants">{{ applicant.name }} - {{ applicant.email }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
