@@ -1,0 +1,52 @@
+<div class="registration-container">
+    <h2>Company Registration</h2>
+
+    <form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
+        <!-- Company Name -->
+        <div>
+            <label for="companyname">Company Name</label>
+            <input type="text" id="companyname" name="companyname" [(ngModel)]="user.companyname" required />
+        </div>
+
+        <!-- City -->
+        <div>
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" [(ngModel)]="user.city" required />
+        </div>
+
+        <!-- Email -->
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" [(ngModel)]="user.email" required email />
+        </div>
+
+        <!-- Password -->
+        <div>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" [(ngModel)]="user.password" required minlength="6" />
+        </div>
+
+        <!-- Confirm Password -->
+        <div>
+            <label for="confirmpassword">Confirm Password</label>
+            <input type="password" id="confirmpassword" name="confirmpassword" [(ngModel)]="user.confirmpassword" required minlength="6" />
+        </div>
+
+        <!-- Address -->
+        <div>
+            <label for="address">Address</label>
+            <textarea id="address" name="address" [(ngModel)]="user.address" required></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" [disabled]="!registrationForm.valid || !passwordsMatch()">Register</button>
+    </form>
+
+    <!-- Display success or error message -->
+    <div *ngIf="registrationSuccess" class="success-message">
+        Registration successful!
+    </div>
+    <div *ngIf="registrationError" class="error-message">
+        Registration failed. Please try again.
+    </div>
+</div>
