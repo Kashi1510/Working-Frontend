@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class InternshipService {
   private baseUrl = 'http://localhost:8055';
+  applyForInternship: any;
 
   constructor(private http: HttpClient) {}
 
