@@ -28,6 +28,7 @@ export class LoginComponent {
 
   onSubmit() {
     this.submitted = true;
+    
 
     if (this.loginForm.invalid) {
       return;
@@ -37,7 +38,7 @@ export class LoginComponent {
       (response) => {
         console.log('Login successful!', response);
         alert('Login successful!');
-        this.router.navigate(['/dashboard']); // Redirect to dashboard after login
+        this.router.navigate(['/employer-dashboard']); // Redirect to dashboard after login
       },
       (error) => {
         console.error('Login failed', error);

@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(to bottom, #0056b3, #0d6efd);
+    background: linear-gradient(to bottom, #f5f6f7, #f4f5f7);
   }
   
   /* Login Box */
@@ -84,7 +84,7 @@
   
   /* Hover Effect */
   .login-btn:hover {
-    background: #004da1;
+    background: #149725;
   }
   
   /* Extra Links */

@@ -1,141 +1,66 @@
-/* General Styles */
-html, body {
-  height: 100%; /* Ensures that the body and html take up the full height of the viewport */
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f4f7fc;
-}
-
-body {
-  display: flex;
-  justify-content: center;   /* Horizontally centers the form */
-  align-items: center;       /* Vertically centers the form */
-  height: 100vh;              /* Full viewport height */
-}
-
-/* Container Styles */
 .registration-container {
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
   padding: 30px;
-  width: 400px;
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Heading Styles */
-h2 {
-  font-size: 24px;
+.registration-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
   color: #333;
-  margin-bottom: 20px;
 }
 
-/* Form Input Styles */
-form div {
-  margin-bottom: 15px;
-  width: 100%;
+.registration-container form {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
 }
 
-/* Label Styles */
-label {
-  font-size: 14px;
+.registration-container label {
   font-weight: bold;
-  color: #333;
-  display: block;
-  margin-bottom: 6px;
+  color: #555;
 }
 
-/* Input and Textarea Styles */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-textarea {
+.registration-container input,
+.registration-container textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  box-sizing: border-box;
-  transition: border-color 0.3s;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-textarea:focus {
-  border-color: #5f72ee;
-  outline: none;
-}
-
-textarea {
-  height: 100px;
-  resize: none;
-  width: 100px;
-}
-
-/* Button Styles */
-button[type="submit"] {
-  background-color: #5f72ee;
-  color: #fff;
-  padding: 12px 20px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
   font-size: 16px;
-  font-weight: bold;
+}
+
+.registration-container button {
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 3px;
+  padding: 10px 20px;
+  font-size: 16px;
   cursor: pointer;
-  width: 100%;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover {
-  background-color: #4e60d9;
+.registration-container button:hover {
+  background-color: #0056b3;
 }
 
-/* Disabled Button */
-button[disabled] {
+.registration-container button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-/* Success & Error Message Styles */
-.success-message,
-.error-message {
-  margin-top: 20px;
-  padding: 10px;
-  text-align: center;
-  width: 100%;
+.registration-container .success-message {
+  color: green;
   font-weight: bold;
-  border-radius: 4px;
+  margin-top: 20px;
 }
 
-.success-message {
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
-}
-
-.error-message {
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
-}
-
-/* Responsive Styles */
-@media (max-width: 480px) {
-  .registration-container {
-      padding: 20px;
-      width: 100%;
-  }
-
-  h2 {
-      font-size: 20px;
-  }
-
-  button[type="submit"] {
-      font-size: 14px;
-  }
+.registration-container .error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 20px;
 }

@@ -14,4 +14,7 @@ export class CompanyService {
   registerCompany(companyData: any): Observable<any> {
     return this.http.post(this.apiUrl, companyData);
   }
+  getCompanyByEmail(email: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}?email=${email}`);
+  }
 }
