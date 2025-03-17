@@ -1,27 +1,13 @@
-<!-- Load an icon library
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div class="navbar">
-    <a class="active" routerLink="/home"><i class="fa fa-fw fa-home"></i> Home</a>
-    <a href="#"><i class="fa fa-fw fa-search"></i> Search</a>
-    <a href="#"><i class="fa fa-fw fa-envelope"></i> Contact</a>
-    <a href="#"><i class="fa fa-fw fa-user"></i>Login</a>
-  </div> -->
-<nav >
 
-<ul>
-    
-    <li><a class="active" routerLink="/home"><i class="fa fa-fw fa-home"></i>Home</a></li>
+<nav class="navbar">
+  <ul>
+    <li><a routerLink="/home" class="active"><i class="fa fa-fw fa-home"></i> Home</a></li>
     <li><a routerLink="/signup"><i class="fa fa-fw fa-user"></i> Register</a></li>
-    <li><a  class="active" routerLink="/login">Login</a></li>
-    <li><a routerLink="/company-signup">Company Registration</a></li>
-<<<<<<< HEAD
-    <!-- <li><a routerLink="/employer-dashboard">Employee Dashboard</a></li> -->
-=======
-    <li><a routerLink="/employer-dashboard">Employee Dashboard</a></li>
-    <li><a routerLink="/student-dashboard">Student Dashboard</a></li>
->>>>>>> 54523f7c5861fe7bbf3b75f9cf2318b0b2844fad
-
-
+    <li><a routerLink="/login"><i class="fa fa-fw fa-sign-in"></i> Login</a></li>
+    <li><a routerLink="/company-signup"><i class="fa fa-fw fa-building"></i> Company Registration</a></li>
+    <li><a routerLink="/employer-dashboard"><i class="fa fa-fw fa-briefcase"></i> Employer Dashboard</a></li>
+    <li><a routerLink="/student-dashboard"><i class="fa fa-fw fa-graduation-cap"></i> Student Dashboard</a></li>
   </ul>
 </nav>
+
 <router-outlet></router-outlet>

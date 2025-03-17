@@ -17,19 +17,22 @@
         <!-- Email -->
         <div>
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" [(ngModel)]="user.email" required email />
+            <input type="email" id="email" name="email" [(ngModel)]="user.email" (input)="validateEmail()" required />
+            <div class="error-message" *ngIf="emailError">{{ emailError }}</div>
         </div>
 
         <!-- Password -->
         <div>
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" [(ngModel)]="user.password" required minlength="6" />
+            <input type="password" id="password" name="password" [(ngModel)]="user.password" (input)="validatePassword()" required minlength="6" />
+            <div class="error-message" *ngIf="passwordError">{{ passwordError }}</div>
         </div>
 
         <!-- Confirm Password -->
         <div>
             <label for="confirmpassword">Confirm Password</label>
-            <input type="password" id="confirmpassword" name="confirmpassword" [(ngModel)]="user.confirmpassword" required minlength="6" />
+            <input type="password" id="confirmpassword" name="confirmpassword" [(ngModel)]="user.confirmpassword" (input)="validateConfirmPassword()" required minlength="6" />
+            <div class="error-message" *ngIf="confirmPasswordError">{{ confirmPasswordError }}</div>
         </div>
 
         <!-- Address -->
@@ -39,7 +42,7 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" [disabled]="!registrationForm.valid || !passwordsMatch()">Register</button>
+        <button type="submit" [disabled]="emailError || passwordError || confirmPasswordError">Register</button>
     </form>
 
     <!-- Display success or error message -->
@@ -47,6 +50,6 @@
         Registration successful!
     </div>
     <div *ngIf="registrationError" class="error-message">
-        Registration failed. Please try again.
+        {{ errorMessage }}
     </div>
 </div>

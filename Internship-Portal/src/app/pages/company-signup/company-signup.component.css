@@ -1,66 +1,95 @@
+/* Centered Registration Container */
 .registration-container {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 50px auto;
   padding: 30px;
-  background-color: #f5f5f5;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
+/* Heading Styling */
 .registration-container h2 {
   text-align: center;
-  margin-bottom: 30px;
-  color: #333;
+  margin-bottom: 25px;
+  color: #004085;
+  font-weight: bold;
 }
 
+/* Form Layout */
 .registration-container form {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 20px;
+  grid-gap: 15px;
 }
 
+/* Labels */
 .registration-container label {
   font-weight: bold;
-  color: #555;
+  color: #333;
+  font-size: 14px;
 }
 
+/* Input Fields */
 .registration-container input,
 .registration-container textarea {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   border: 1px solid #ccc;
-  border-radius: 3px;
-  font-size: 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: 0.3s ease-in-out;
 }
 
+/* Input Focus Effect */
+.registration-container input:focus,
+.registration-container textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Error Messages */
+.error-message {
+  color: red;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* Success Message */
+.success-message {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Submit Button */
 .registration-container button {
   background-color: #007bff;
-  color: #fff;
+  color: white;
   border: none;
-  border-radius: 3px;
-  padding: 10px 20px;
+  border-radius: 6px;
+  padding: 12px;
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: 0.3s ease-in-out;
 }
 
+/* Hover Effect */
 .registration-container button:hover {
   background-color: #0056b3;
 }
 
+/* Disabled Button */
 .registration-container button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-.registration-container .success-message {
-  color: green;
-  font-weight: bold;
-  margin-top: 20px;
-}
-
-.registration-container .error-message {
-  color: red;
-  font-weight: bold;
-  margin-top: 20px;
+/* Responsive Design */
+@media (max-width: 480px) {
+  .registration-container {
+    width: 90%;
+    padding: 25px;
+  }
 }

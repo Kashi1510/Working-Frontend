@@ -3,7 +3,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
 import { EmployerDashboardComponent } from './pages/employer-dashboard/employer-dashboard.component';
-
 import { InternshipDetailsComponent } from './pages/internship-details/internship-details.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CompanySignupComponent } from './pages/company-signup/company-signup.component';
