@@ -20,18 +20,17 @@ export class InternshipService {
     return this.http.post(`${this.apiUrl}/internships`, internship);
   }
 
-  // Get applicants for a specific internship
-  getApplicants(studentId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/applications/student/${studentId}`);
+  getApplicants(internshipId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/internships/${internshipId}/applicants`);
   }
 
-  // Approve an applicant's application
-  approveApplication(applicationId: number): Observable<any> {
-    return this.http.put(`${this.apiUrl}/applications/approve/${applicationId}`, {});
+  approveApplication(internshipId: number, applicationId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/internships/${internshipId}/applications/${applicationId}/approve`, {});
   }
 
-  // Reject an applicant's application
-  rejectApplication(applicationId: number): Observable<any> {
-    return this.http.put(`${this.apiUrl}/applications/reject/${applicationId}`, {});
+  rejectApplication(internshipId: number, applicationId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/internships/${internshipId}/applications/${applicationId}/reject`, {});
   }
+
+ 
 }

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApplicationService {
   private baseUrl = 'http://localhost:8055/applications';
+ 
   // getApplicants: any;
 
   constructor(private http: HttpClient) {}
@@ -16,8 +17,10 @@ export class ApplicationService {
     return this.http.post(`${this.baseUrl}/apply`, application);
   }
 
-  getApplicants(studentId: number): Observable<any> {
+  getApplicationsByStudent(studentId: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/student/${studentId}`);
   }
+  
+
 
 }

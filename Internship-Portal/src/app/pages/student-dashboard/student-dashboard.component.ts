@@ -13,46 +13,87 @@ import { error } from 'node:console';
   styleUrl: './student-dashboard.component.css'
 })
 export class StudentDashboardComponent implements OnInit {
-  internships: any[] = [];
-  applications: any[] = [];
-  studentId: number = 1; // Assume logged-in student ID
+  // internships: any[] = [];
+  // applications: any[] = [];
+  // studentId: number = 1; // Assume logged-in student ID
 
-  constructor(private internshipService: InternshipService, private applicationService: ApplicationService) { }
+  // constructor(private internshipService: InternshipService, private applicationService: ApplicationService) {}
 
-  ngOnInit() {
-    this.getInternships();
-    this.getApplications();
-  }
+  // ngOnInit() {
+  //   this.getInternships();
+  //   this.getApplications();
+  // }
 
-  // Fetch all internships
-  getInternships() {
-    this.internshipService.getInternships().subscribe(data => { this.internships = data; });
-  }
+  // // Fetch all internships
+  // getInternships() {
+  //   this.internshipService.getInternships().subscribe(data => {this.internships = data;});
+  // }
 
-  // Apply for an internship
-  applyInternship(internshipId: number) {
-    const applicationData = {
-      student: { id: this.studentId },
-      internship: { id: internshipId },
-      appliedDate: new Date()
-    };
-    this.applicationService.applyForInternship(applicationData).subscribe(
-      {
-        next: (response: any) => {
-          alert('Application submitted Successfully');
-          this.getApplications();
-        },
-        error: (error) => {
+  // // Apply for an internship
+  // applyInternship(internshipId: number) {
+  //   const applicationData = {
+  //     student: {id:this.studentId},
+  //     internship:{id: internshipId},
+  //     appliedDate: new Date()
+  //   };
+  //   this.applicationService.applyForInternship(applicationData).subscribe((response:any) => {
+  //     alert('Application submitted Successfully');
+  //     this.getApplications();});
+  // }
 
-          console.log(error.error);
-        }
-      }
-    );
-  }
+  // // Fetch student's applications
+  // getApplications() {
+  //   this.applicationService.getApplicationsByStudent(this.studentId).subscribe((data: any[]) => this.applications = data);
+  // }
+ internships: any[] = [];
+applications: any[] = [];
+studentId: number= 1;
+showInternshipsSection: boolean = true;
+showApplicationsSection: boolean = false;
 
-  // Fetch student's applications
-  getApplications() {
+constructor(private internshipService: InternshipService, private applicationService: ApplicationService) {}
 
-    this.applicationService.getApplicants(this.studentId).subscribe((data: any[]) => this.applications = data);
-  }
+ngOnInit(): void {
+  this.getInternships(); // Load internships on initial load
+}
+
+getInternships(): void {
+  this.internshipService.getInternships().subscribe(data => {
+    this.internships = data;
+  });
+}
+
+applyInternship(internshipId: number)  {
+  // Logic for applying to internship
+  const applicationData = {
+        student: {id:this.studentId},
+        internship:{id: internshipId},
+        appliedDate: new Date()
+      };
+      this.applicationService.applyForInternship(applicationData).subscribe((response:any) => {
+        alert('Application submitted Successfully');
+        this.getApplications();});
+}
+
+getApplications(): void {
+  // Logic to get the student's applications
+  console.log('Getting applications');
+  this.applicationService.getApplicationsByStudent(this.studentId).subscribe(
+    (data: any[]) => {this.applications = data;
+      console.log(this.applications);
+    }
+  );
+  
+}
+
+showInternships(): void {
+  this.showInternshipsSection = true;
+  this.showApplicationsSection = false;
+}
+
+showApplications(): void {
+  this.showInternshipsSection = false;
+  this.showApplicationsSection = true;
+  this.getApplications(); // Fetch applications when switching to My Applications
+}
 }

@@ -1,74 +1,24 @@
 <div class="container">
-  <h2>Internships</h2>
-  
-  <!-- Internship Post Form -->
+  <h1>Employer Dashboard</h1>
   <form (submit)="postInternship()" class="mb-4">
-    <div class="mb-3">
-      <input
-        type="text"
-        [(ngModel)]="internship.title"
-        name="title"
-        class="form-control"
-        placeholder="Internship Title"
-        required
-      />
-    </div>
-    <div class="mb-3">
-      <input
-        type="text"
-        [(ngModel)]="internship.company"
-        name="company"
-        class="form-control"
-        placeholder="Company Name"
-        required
-      />
-    </div>
-    <div class="mb-3">
-      <textarea
-        [(ngModel)]="internship.description"
-        name="description"
-        class="form-control"
-        placeholder="Description"
-        required
-      ></textarea>
-    </div>
+    <input type="text" [(ngModel)]="internship.title" name="title" class="form-control" placeholder="Internship Title" required />
+    <input type="text" [(ngModel)]="internship.companyName" name="companyName" class="form-control" placeholder="Company Name" required />
+    <textarea [(ngModel)]="internship.description" name="description" class="form-control" placeholder="Description" required></textarea>
     <button type="submit" class="btn btn-primary">Post Internship</button>
   </form>
 
-  <!-- Display Internships -->
-  <div *ngFor="let job of internships" class="card mb-3">
-    <div class="card-body">
-      <h5>{{ job.title }} - {{ job.company }}</h5>
-      <p>{{ job.description }}</p>
-      
-      <!-- Button to View Applicants for the selected internship -->
-      <button class="btn btn-info" (click)="getApplicants(job.id)">View Applicants</button>
+  <div *ngFor="let internship of internships" class="card mb-3">
+    <h5>{{ internship.title }} - {{ internship.companyName }}</h5>
+    <button class="btn btn-info" (click)="getApplicants(internship.id)">View Applicants</button>
+  </div>
 
-      <!-- Applicants List with Action Buttons (Approve/Reject) -->
-      <div *ngIf="selectedInternship === job.id">
-        <h4>Applicants</h4>
-        <ul *ngIf="applicants.length > 0">
-          <li *ngFor="let applicant of applicants">
-            {{ applicant.name }} - {{ applicant.email }}
-            <!-- Approve Button -->
-            <button
-              class="btn btn-success btn-sm"
-              (click)="approveApplication(applicant.id)"
-            >
-              Approve
-            </button>
-            <!-- Reject Button -->
-            <button
-              class="btn btn-danger btn-sm"
-              (click)="rejectApplication(applicant.id)"
-            >
-              Reject
-            </button>
-          </li>
-        </ul>
-        <!-- Display a message if no applicants -->
-        <p *ngIf="applicants.length === 0">No applicants for this internship.</p>
-      </div>
-    </div>
+  <div *ngIf="selectedInternshipId">
+    <h3>Applicants</h3>
+    <ul *ngFor="let applicant of applicants">
+      <li>{{ applicant.student.name }} - {{ applicant.status }}
+        <button class="btn btn-success" (click)="approveApplication(applicant.id)">Approve</button>
+        <button class="btn btn-danger" (click)="rejectApplication(applicant.id)">Reject</button>
+      </li>
+    </ul>
   </div>
 </div>

@@ -1,23 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { InternshipService } from '../../service/internship.service';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { ApplicationService } from '../../services/application.service';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-employee-dashboard',
-  imports: [CommonModule, RouterModule, FormsModule],
+  selector: 'app-employer-dashboard',
+  imports:[CommonModule,FormsModule,RouterModule],
   templateUrl: './employer-dashboard.component.html',
   styleUrls: ['./employer-dashboard.component.css'],
 })
 export class EmployerDashboardComponent implements OnInit {
   internships: any[] = [];
   applicants: any[] = [];
-  internship = { title: '', company: '', description: '' };
-  selectedInternship: number | null = null;
+  internship = { title: '', companyName: '', description: '' };
+  selectedInternshipId: number | null = null;
 
-  constructor(private internshipService: InternshipService,private applicationService:ApplicationService) {}
+  constructor(
+    private internshipService: InternshipService,
+    private applicationService: ApplicationService
+  ) {}
 
   ngOnInit() {
     this.getInternships();
@@ -34,29 +37,29 @@ export class EmployerDashboardComponent implements OnInit {
   postInternship() {
     this.internshipService.postInternship(this.internship).subscribe(() => {
       this.getInternships();
-      this.internship = { title: '', company: '', description: '' }; // Reset form
+      this.internship = { title: '', companyName: '', description: '' };
     });
   }
 
-  // Fetch applicants for the selected internship
-  getApplicants(studentId: number) {
-    this.selectedInternship = studentId;
-    this.applicationService.getApplicants(studentId).subscribe((data) => {
+  // Get applicants for the selected internship
+  getApplicants(internshipId: number) {
+    this.selectedInternshipId = internshipId;
+    this.internshipService.getApplicants(internshipId).subscribe((data) => {
       this.applicants = data;
     });
   }
 
-  // Approve an applicant's application
+  // Approve applicant
   approveApplication(applicationId: number) {
-    this.internshipService.approveApplication(applicationId).subscribe(() => {
-      this.getApplicants(this.selectedInternship!); // Refresh applicants
+    this.internshipService.approveApplication(this.selectedInternshipId!, applicationId).subscribe(() => {
+      this.getApplicants(this.selectedInternshipId!);
     });
   }
 
-  // Reject an applicant's application
+  // Reject applicant
   rejectApplication(applicationId: number) {
-    this.internshipService.rejectApplication(applicationId).subscribe(() => {
-      this.getApplicants(this.selectedInternship!); // Refresh applicants
+    this.internshipService.rejectApplication(this.selectedInternshipId!, applicationId).subscribe(() => {
+      this.getApplicants(this.selectedInternshipId!);
     });
   }
 }
