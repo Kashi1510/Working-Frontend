@@ -1,19 +1,142 @@
-.internship-card {
-    border: 1px solid #ccc;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-  }
-  
-  button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+/* Container that holds everything */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Navigation Bar */
+.navbar {
+  background-color: #007bff;
+  padding: 10px 20px;
+}
+
+.navbar-brand {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-nav .btn {
+  color: white;
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  margin-right: 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.navbar-nav .btn:hover {
+  background-color: #0056b3;
+}
+
+/* Page Heading */
+h1 {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 40px;
+}
+
+/* Button Styling */
+button {
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+button.btn-primary {
+  background-color: #007bff;
+  border: none;
+  color: white;
+}
+
+button.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+button.btn-success {
+  background-color: #28a745;
+  border: none;
+  color: white;
+}
+
+button.btn-success:hover {
+  background-color: #218838;
+}
+
+button.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+  color: white;
+}
+
+button.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Card Styling for Internships */
+.card {
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.card-text {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* Available Internships Section */
+h3 {
+  font-size: 22px;
+  margin-top: 30px;
+  text-align: center;
+  color: #333;
+}
+
+button.mb-3 {
+  margin-bottom: 20px;
+}
+
+/* My Applications Section */
+h3.mt-5 {
+  font-size: 22px;
+  margin-top: 40px;
+  text-align: center;
+  color: #333;
+}
+
+.card.mt-3 {
+  margin-top: 20px;
+}
+
+/* Error Message Styling */
+.error-message {
+  color: red;
+  font-size: 12px;
+}
