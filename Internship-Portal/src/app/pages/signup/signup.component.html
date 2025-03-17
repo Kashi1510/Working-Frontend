@@ -1,61 +1,61 @@
 <div class="container my-5">
   <h1 class="text-center mb-4">Student Registration</h1>
   <form (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm">
+
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="firstName">First Name</label>
-        <input type="text" class="form-control" id="user.firstName" placeholder="Enter your first name"
-          [(ngModel)]="user.firstName" name="firstName" required>
+        <input type="text" class="form-control" [(ngModel)]="user.firstName" name="firstName" (input)="validateField('firstName')" required>
+        <small class="text-danger" *ngIf="errors.firstName">{{ errors.firstName }}</small>
       </div>
       <div class="form-group col-md-6">
         <label for="lastName">Last Name</label>
-        <input type="text" class="form-control" id="user.lastName" placeholder="Enter your last name"
-          [(ngModel)]="user.lastName" name="lastName" required>
+        <input type="text" class="form-control" [(ngModel)]="user.lastName" name="lastName" (input)="validateField('lastName')" required>
+        <small class="text-danger" *ngIf="errors.lastName">{{ errors.lastName }}</small>
       </div>
     </div>
+
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="email" class="form-control" id="user.email" placeholder="Enter your email" [(ngModel)]="user.email"
-        name="email" required>
+      <input type="email" class="form-control" [(ngModel)]="user.email" name="email" (input)="validateField('email')" required>
+      <small class="text-danger" *ngIf="errors.email">{{ errors.email }}</small>
     </div>
-    <div class="form-group col-md-6">
+
+    <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" class="form-control" id="user.password" placeholder="Enter your Password"
-        [(ngModel)]="user.password" name="password" minlength="6" required>
+      <input type="password" class="form-control" [(ngModel)]="user.password" name="password" (input)="validateField('password')" minlength="6" required>
+      <small class="text-danger" *ngIf="errors.password">{{ errors.password }}</small>
     </div>
-    <div class="form-group col-md-6">
+
+    <div class="form-group">
       <label for="confirmPassword">Confirm Password</label>
-      <input type="password" class="form-control" id="user.confirmPassword" placeholder="Confirm your password"
-        [(ngModel)]="user.confirmPassword" name="confirmPassword" required>
-      <div *ngIf="signupForm.submitted && user.password !== user.confirmPassword" class="text-danger">
-        Passwords do not match.
-      </div>
+      <input type="password" class="form-control" [(ngModel)]="user.confirmPassword" name="confirmPassword" (input)="validateField('confirmPassword')" required>
+      <small class="text-danger" *ngIf="errors.confirmPassword">{{ errors.confirmPassword }}</small>
     </div>
+
     <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="sslcPercentage">SSLC Percentage</label>
-        <input type="text" class="form-control" id="user.sslcPercentage" placeholder="Enter your SSLC percentage"
-          [(ngModel)]="user.sslcPercentage" name="sslcPercentage" pattern="^[0-9]{1,2}(\.[0-9]{1,2})?$"
-          title="Please enter a valid SSLC percentage (e.g., 90.50)" required>
+        <label for="sslcPercentage">SSLC Percentage (%)</label>
+        <input type="text" class="form-control" [(ngModel)]="user.sslcPercentage" name="sslcPercentage" (input)="validateField('sslcPercentage')" required>
+        <small class="text-danger" *ngIf="errors.sslcPercentage">{{ errors.sslcPercentage }}</small>
       </div>
       <div class="form-group col-md-4">
-        <label for="pucPercentage">PUC Percentage</label>
-        <input type="text" class="form-control" id="user.pucPercentage" placeholder="Enter your PUC percentage"
-          [(ngModel)]="user.pucPercentage" name="pucPercentage" pattern="^[0-9]{1,2}(\.[0-9]{1,2})?$"
-          title="Please enter a valid PUC percentage (e.g., 85.75)" required>
+        <label for="pucPercentage">PUC Percentage (%)</label>
+        <input type="text" class="form-control" [(ngModel)]="user.pucPercentage" name="pucPercentage" (input)="validateField('pucPercentage')" required>
+        <small class="text-danger" *ngIf="errors.pucPercentage">{{ errors.pucPercentage }}</small>
       </div>
       <div class="form-group col-md-4">
-        <label for="degreeCgpa">Degree CGPA</label>
-        <input type="text" class="form-control" id="user.degreeCgpa" placeholder="Enter your Degree CGPA"
-          [(ngModel)]="user.degreeCgpa" name="degreeCgpa" pattern="^[0-9]{1,2}(\.[0-9]{1,2})?$"
-          title="Please enter a valid Degree CGPA (e.g., 8.50)" required>
+        <label for="degreeCgpa">Degree CGPA (0-10)</label>
+        <input type="text" class="form-control" [(ngModel)]="user.degreeCgpa" name="degreeCgpa" (input)="validateField('degreeCgpa')" required>
+        <small class="text-danger" *ngIf="errors.degreeCgpa">{{ errors.degreeCgpa }}</small>
       </div>
     </div>
+
     <div class="form-group">
       <label for="skills">Skills</label>
-      <input type="text" class="form-control" id="user.skills" placeholder="Enter your skills (separated by commas)"
-        [(ngModel)]="user.skills" name="skills" required>
+      <input type="text" class="form-control" [(ngModel)]="user.skills" name="skills" required>
     </div>
-    <button type="submit" class="btn btn-primary" [disabled]="user.password !== user.confirmPassword || signupForm.invalid">Register</button>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!isFormValid()">Register</button>
   </form>
 </div>

@@ -1,47 +1,96 @@
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #232222;
-  }
-  .logoContainer {
-    display: flex;
-    align-items: center;
-    /* padding: 9px 9px 9px 24px; */
-    /* background: #fff; */
-    /* border: 1.26923px solid #eaf1f5; */
-    box-sizing: border-box;
-    box-shadow: 0 4px 12px rgb(86 141 187 / 12%);
-    border-radius: 100px;
-    width: 500px;
-    height: 70px;
-    border: 1px solid white;
+/* Global Page Styling */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f7fc; /* Light professional background */
+  color: #333;
 }
-  
-  li {
-    float: left;
+
+/* Navigation Bar Styling */
+.navbar {
+  background: linear-gradient(135deg, #003b73, #0073b1); /* Professional Blue Gradient */
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Navigation List */
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 25px;
+}
+
+/* Navigation Items */
+.navbar ul li {
+  position: relative;
+}
+
+/* Navigation Links */
+.navbar ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 18px;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Icons */
+.navbar ul li a i {
+  font-size: 18px;
+}
+
+/* Hover & Active Effects */
+.navbar ul li a:hover,
+.navbar ul li a.active {
+  background-color: #ff9800; /* Elegant accent color */
+  color: white;
+  box-shadow: 0px 4px 12px rgba(255, 152, 0, 0.4);
+}
+
+/* Page Container */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px;
   }
-  
-  li a {
-    display: block;
-    color: rgb(245, 241, 241);
+
+  .navbar ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar ul li {
+    width: 100%;
     text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
   }
-  
-  /* Change the link color to #111 (black) on hover */
-  li a:hover {
-    background-color: #121111;
+
+  .navbar ul li a {
+    width: 100%;
+    justify-content: center;
   }
-  .active {
-    background-color: #04AA6D;
-  }
-  
-  @media screen and (max-width: 500px) {
-    .navbar a {
-      float: none;
-      display: block;
-    }
-  }
+}
