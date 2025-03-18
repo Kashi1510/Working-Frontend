@@ -4,6 +4,12 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 
+interface LoginResponse {
+  userType?: string;
+  redirect?: string; // ✅ Updated to match backend response
+  error?: string;
+}
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -34,23 +40,18 @@ export class LoginComponent {
     }
 
     this.loginService.login(this.loginForm.value).subscribe(
-      (response) => {
-        if (response.dashboard) {
+      (response: LoginResponse) => {
+        if (response.redirect) {
           console.log('Login successful!', response);
           alert('Login successful!');
 
-          // ✅ Save user type in localStorage (optional chaining prevents errors)
+          // ✅ Save user type in localStorage (optional)
           if (response.userType) {
             localStorage.setItem('userType', response.userType);
           }
 
-          // ✅ Open dashboard in a new tab
-          window.open(response.dashboard, '_blank');
-
-          // ✅ Reload the page to update navbar
-          setTimeout(() => {
-            window.location.reload();
-          }, 500); 
+          // ✅ Navigate to the dashboard in the SAME tab
+          this.router.navigate([response.redirect]);
         } else {
           alert(response.error || 'Invalid email or password!');
         }
