@@ -1,12 +1,18 @@
-
 <nav class="navbar">
   <ul>
     <li><a routerLink="/home" class="active"><i class="fa fa-fw fa-home"></i> Home</a></li>
-    <li><a routerLink="/signup"><i class="fa fa-fw fa-user"></i> Register</a></li>
-    <li><a routerLink="/login"><i class="fa fa-fw fa-sign-in"></i> Login</a></li>
-    <li><a routerLink="/company-signup"><i class="fa fa-fw fa-building"></i> Company Registration</a></li>
-    <li><a routerLink="/employer-dashboard"><i class="fa fa-fw fa-briefcase"></i> Employer Dashboard</a></li>
-    <li><a routerLink="/student-dashboard"><i class="fa fa-fw fa-graduation-cap"></i> Student Dashboard</a></li>
+
+ 
+    <li *ngIf="!userType"><a routerLink="/signup"><i class="fa fa-fw fa-user"></i>Student Registration</a></li>
+
+    
+    <li *ngIf="!userType"><a routerLink="/company-signup"><i class="fa fa-fw fa-building"></i> Company Registration</a></li>
+
+   
+    <li *ngIf="!userType"><a routerLink="/login"><i class="fa fa-fw fa-sign-in"></i> Login</a></li>
+
+    
+    <li *ngIf="userType"><a (click)="logout()"><i class="fa fa-fw fa-sign-out"></i> Logout</a></li>
   </ul>
 </nav>
 

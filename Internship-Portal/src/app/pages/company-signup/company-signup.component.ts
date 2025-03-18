@@ -42,7 +42,7 @@ export class CompanySignupComponent {
     }
   }
 
-  // ✅ Validate password dynamically
+  //  Validate password dynamically
   validatePassword(): void {
     if (!this.user.password) {
       this.passwordError = 'Password is required';

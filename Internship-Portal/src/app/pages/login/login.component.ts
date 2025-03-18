@@ -28,7 +28,6 @@ export class LoginComponent {
 
   onSubmit() {
     this.submitted = true;
-    
 
     if (this.loginForm.invalid) {
       return;
@@ -36,13 +35,29 @@ export class LoginComponent {
 
     this.loginService.login(this.loginForm.value).subscribe(
       (response) => {
-        console.log('Login successful!', response);
-        alert('Login successful!');
-        this.router.navigate(['/employer-dashboard']); // Redirect to dashboard after login
+        if (response.dashboard) {
+          console.log('Login successful!', response);
+          alert('Login successful!');
+
+          // ✅ Save user type in localStorage (optional chaining prevents errors)
+          if (response.userType) {
+            localStorage.setItem('userType', response.userType);
+          }
+
+          // ✅ Open dashboard in a new tab
+          window.open(response.dashboard, '_blank');
+
+          // ✅ Reload the page to update navbar
+          setTimeout(() => {
+            window.location.reload();
+          }, 500); 
+        } else {
+          alert(response.error || 'Invalid email or password!');
+        }
       },
       (error) => {
         console.error('Login failed', error);
-        alert('Invalid email or password!');
+        alert('Login failed! Please try again.');
       }
     );
   }
