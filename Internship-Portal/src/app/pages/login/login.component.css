@@ -26,10 +26,24 @@
 }
 
 /* Headings */
+h1
+
+  {
+    margin-bottom: 20px;
+    font-size: 30px; /* Increased for better visibility */
+    color: #004085;
+    font-weight: bold;
+    text-transform: uppercase; /* Professional Look */
+    letter-spacing: 1px;
+  }
+
 h2 {
   margin-bottom: 20px;
+  font-size: 24px; /* Increased for better visibility */
   color: #004085;
   font-weight: bold;
+  text-transform: uppercase; /* Professional Look */
+  letter-spacing: 1px;
 }
 
 /* Form Group */
@@ -113,5 +127,9 @@ input:focus {
   .login-box {
       padding: 30px;
       width: 90%;
+  }
+
+  h2 {
+      font-size: 22px; /* Slightly smaller for mobile screens */
   }
 }
