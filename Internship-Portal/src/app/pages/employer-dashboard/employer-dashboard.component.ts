@@ -1,8 +1,8 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { InternshipService } from '../../service/internship.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule} from '@angular/forms';
 
 
 
@@ -15,8 +15,9 @@ import { FormsModule, NgModel } from '@angular/forms';
 export class EmployerDashboardComponent implements OnInit {
   internships: any[] = [];
   applicants: any[] = [];
-  internship = { title: '', company: '', description: '' };
-  selectedInternship: number | null = null;
+
+  internship = { title: '', company: '', description: ''};
+  selectedInternship: number | null = 1;
  
 
   constructor(private internshipService: InternshipService) {}

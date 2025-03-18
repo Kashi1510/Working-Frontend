@@ -1,4 +1,6 @@
-<div class="container">
+<!-- First code -->
+
+<!-- <div class="container">
     <h1>Created BY PAVAN B N</h1>
   <h2>Student Dashboard</h2>
   <button class="btn btn-primary" (click)="getInternships()">Get Internships</button>
@@ -25,4 +27,48 @@
           <p *ngIf="application.status === 'Rejected'">Better luck next time!</p>
       </div>
   </div>
-</div>
+</div> -->
+<div class="container">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      
+      <div class="navbar-nav">
+        <button class="nav-item nav-link btn" (click)="showInternships()">Available Internships</button>
+        <button class="nav-item nav-link btn" (click)="showApplications()">My Applications</button>
+      </div>
+    </nav>
+  
+    <!-- Page Heading -->
+  
+    <!-- Available Internships Section -->
+    <div *ngIf="showInternshipsSection">
+      <!-- <button class="btn btn-primary mb-3" (click)="getInternships()">Get Internships</button> -->
+  
+      <h3>Available Internships</h3>
+      <div *ngFor="let internship of internships" class="card mt-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ internship.title }}</h5>
+          <p class="card-text">{{ internship.company }}</p>
+          <p class="card-text">{{ internship.description }}</p>
+          <button class="btn btn-success" (click)="applyInternship(internship.id)">Apply</button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- My Applications Section -->
+    <div *ngIf="showApplicationsSection">
+      <h3 class="mt-5">Applications of companies you have applied for</h3>
+      <!-- <button class="btn btn-secondary mb-3" (click)="getApplications()">My Applications</button> -->
+      
+      <div *ngFor="let application of applications" class="card mt-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ application.internship.title }}</h5>
+          <p class="card-text">Company: {{ application.internship.company }}</p>
+          <p class="card-text">Applied Date: {{ application.appliedDate }}</p>
+          <p *ngIf="application.status === 'Accepted'">Interview Date: {{ application.interviewDate }}</p>
+          <p *ngIf="application.status === 'Rejected'">Better luck next time!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
