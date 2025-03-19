@@ -41,34 +41,36 @@
     <!-- Page Heading -->
   
     <!-- Available Internships Section -->
-    <div *ngIf="showInternshipsSection">
-      <!-- <button class="btn btn-primary mb-3" (click)="getInternships()">Get Internships</button> -->
-  
-      <h3>Available Internships</h3>
-      <div *ngFor="let internship of internships" class="card mt-3">
-        <div class="card-body">
-          <h5 class="card-title">{{ internship.title }}</h5>
-          <p class="card-text">{{ internship.company }}</p>
-          <p class="card-text">{{ internship.description }}</p>
-          <button class="btn btn-success" (click)="applyInternship(internship.id)">Apply</button>
-        </div>
-      </div>
-    </div>
+    <h2>Available Internships</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Company</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let internship of internships">
+      <td>{{ internship.title }}</td>
+      <td>{{ internship.companyName }}</td>
+      <td><button (click)="applyInternship(internship.id)">Apply</button></td>
+    </tr>
+  </tbody>
+</table>
+
   
     <!-- My Applications Section -->
-    <div *ngIf="showApplicationsSection">
-      <h3 class="mt-5">Applications of companies you have applied for</h3>
-      <!-- <button class="btn btn-secondary mb-3" (click)="getApplications()">My Applications</button> -->
-      
-      <div *ngFor="let application of applications" class="card mt-3">
-        <div class="card-body">
-          <h5 class="card-title">{{ application.internship.title }}</h5>
-          <p class="card-text">Company: {{ application.internship.company }}</p>
-          <p class="card-text">Applied Date: {{ application.appliedDate }}</p>
-          <p *ngIf="application.status === 'Accepted'">Interview Date: {{ application.interviewDate }}</p>
-          <p *ngIf="application.status === 'Rejected'">Better luck next time!</p>
-        </div>
-      </div>
+    <div *ngFor="let app of applications" class="application-card">
+      <h3>{{ app.internship.title }}</h3>
+      <p><strong>Company:</strong> {{ app.internship.company.name }}</p>
+      <p><strong>Applied Date:</strong> {{ app.appliedDate }}</p>
+      <p><strong>Status:</strong> {{ app.status }}</p>
+    
+      <!-- Show interview date only if application is accepted -->
+      <p *ngIf="app.status === 'Accepted'">
+        <strong>Interview Date:</strong> {{ app.interviewDate }}
+      </p>
     </div>
-  </div>
-  
+    
+    

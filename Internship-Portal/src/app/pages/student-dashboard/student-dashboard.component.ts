@@ -59,7 +59,10 @@ ngOnInit(): void {
 
 getInternships(): void {
   this.internshipService.getInternships().subscribe(data => {
-    this.internships = data;
+    this.internships = data.map((internship: { company: { name: any; }; }) => ({
+      ...internship,
+      companyName: internship.company?.name || 'Unknown Company' // Handle cases where company might be null
+    }));
   });
 }
 
@@ -68,23 +71,41 @@ applyInternship(internshipId: number)  {
   const applicationData = {
         student: {id:this.studentId},
         internship:{id: internshipId},
-        appliedDate: new Date()
+        appliedDate: new Date(),
+        
+        interviewDate : new Date()
       };
       this.applicationService.applyForInternship(applicationData).subscribe((response:any) => {
         alert('Application submitted Successfully');
         this.getApplications();});
 }
-
 getApplications(): void {
-  // Logic to get the student's applications
-  console.log('Getting applications');
-  this.applicationService.getApplicationsByStudent(this.studentId).subscribe(
-    (data: any[]) => {this.applications = data;
-      console.log(this.applications);
-    }
-  );
-  
+  this.applicationService.getApplicationsByStudent(this.studentId).subscribe((data: any[]) => {
+    this.applications = data.map(app => ({
+      id: app.id,
+      internship: {
+        title: app.internship?.title || "Unknown Title",
+        company: {
+          name: app.internship?.company?.name || "Unknown Company"
+        }
+      },
+      appliedDate: app.appliedDate ? new Date(app.appliedDate).toLocaleDateString() : "N/A",
+      status: app.status || "Pending",
+      interviewDate: app.status === "Accepted" && app.appliedDate 
+        ? this.calculateInterviewDate(app.appliedDate) 
+        : "Not Scheduled"
+    }));
+  });
 }
+
+// Calculate interview date (3 days after applied date)
+calculateInterviewDate(appliedDate: string): string {
+  const applied = new Date(appliedDate);
+  applied.setDate(applied.getDate() + 3); // Add 3 days
+  return applied.toLocaleDateString();
+}
+
+
 
 showInternships(): void {
   this.showInternshipsSection = true;

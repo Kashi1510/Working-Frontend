@@ -5,6 +5,35 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+export interface Student {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  sslcPercentage: string;
+  pucPercentage: string;
+  degreeCgpa: string;
+  skills: string;
+}
+
+export interface Application {
+  id: number;
+  student: Student;
+  status: string;
+}
+export interface Company {
+  id: number;
+  name: string; // Add other company fields as necessary
+}
+
+export interface Internship {
+  id: number;
+  title: string;
+  description: string;
+  company: Company; // Include company details
+}
+
+
 @Component({
   selector: 'app-employer-dashboard',
   imports:[CommonModule,FormsModule,RouterModule],
@@ -12,10 +41,11 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./employer-dashboard.component.css'],
 })
 export class EmployerDashboardComponent implements OnInit {
-  internships: any[] = [];
-  applicants: any[] = [];
-  internship = { title: '', companyName: '', description: '' };
+  internships: Internship[] = [];
+  applicants: Application[]  = [];
+  internship = { title: '', companyName: '', description: '',company: { id: 0, name: '' } };
   selectedInternshipId: number | null = null;
+  
 
   constructor(
     private internshipService: InternshipService,
@@ -37,14 +67,14 @@ export class EmployerDashboardComponent implements OnInit {
   postInternship() {
     this.internshipService.postInternship(this.internship).subscribe(() => {
       this.getInternships();
-      this.internship = { title: '', companyName: '', description: '' };
+      this.internship = { title: '', companyName: '', description: '',company: { id: 0, name: '' } };
     });
   }
 
   // Get applicants for the selected internship
   getApplicants(internshipId: number) {
     this.selectedInternshipId = internshipId;
-    this.internshipService.getApplicants(internshipId).subscribe((data) => {
+    this.internshipService.getApplicants(internshipId).subscribe((data: Application[]) => {
       this.applicants = data;
     });
   }
