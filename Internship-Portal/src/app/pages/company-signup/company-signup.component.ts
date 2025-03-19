@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CompanyService } from '../../services/company.service';
+import { Router } from '@angular/router'; // ✅ Import Router
 
 @Component({
   selector: 'app-company-signup',
@@ -23,12 +24,13 @@ export class CompanySignupComponent {
   registrationSuccess = false;
   registrationError = false;
   errorMessage: string = '';
-
-  constructor(private companyService: CompanyService) {}
-
   emailError = '';
   passwordError = '';
   confirmPasswordError = '';
+
+  constructor(private companyService: CompanyService,private router: Router) {}
+
+ 
 
   // ✅ Validate email dynamically
   validateEmail(): void {
@@ -71,7 +73,7 @@ export class CompanySignupComponent {
   }
 
   // ✅ Handle form submission
-  onSubmit() {
+  onSubmit(form:NgForm) {
     this.validateEmail();
     this.validatePassword();
     this.validateConfirmPassword();
@@ -86,10 +88,15 @@ export class CompanySignupComponent {
 
     this.companyService.registerCompany(this.user).subscribe({
       next: (response) => {
-        console.log('Registration successful!', response);
-        alert('Registration successful!');
+       
         this.registrationSuccess = true;
         this.registrationError = false;
+        console.log('Registration successful!', response);
+        alert('Registration successful!, redirecting to login..');
+        form.resetForm();
+        setTimeout(() => {
+          this.router.navigate(['/login']); // ✅ Redirecting to login
+        }, 1000);
       },
       error: (error) => {
         console.error('Registration failed', error);

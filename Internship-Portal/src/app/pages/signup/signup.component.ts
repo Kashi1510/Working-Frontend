@@ -26,7 +26,7 @@ export class SignupComponent {
 
   errors: any = {};
 
-  constructor(private signService: SignService, private router: Router) {}
+  constructor(private signupService: SignService, private router: Router) {}
 
   validateField(field: string) {
     switch (field) {
@@ -85,7 +85,7 @@ export class SignupComponent {
 
     console.log('Submitting User Object:', this.user);
 
-    this.signService.registerUser(this.user).subscribe({
+    this.signupService.registerUser(this.user).subscribe({
       next: (response) => {
         console.log('Signup Successful', response);
         alert('Signup Successful! Redirecting to login...');

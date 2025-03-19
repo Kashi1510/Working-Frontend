@@ -10,7 +10,7 @@ export class CompanyService {
 
   constructor(private http: HttpClient) {}
 
-  // ✅ Register a new company (Send data to backend)
+  //  Register a new company (Send data to backend)
   registerCompany(companyData: any): Observable<any> {
     return this.http.post(this.apiUrl, companyData);
   }

@@ -13,7 +13,7 @@ interface LoginResponse {
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule], // ✅ Ensure these modules are included
+  imports: [CommonModule, ReactiveFormsModule, RouterModule], 
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -40,18 +40,23 @@ export class LoginComponent {
     }
 
     this.loginService.login(this.loginForm.value).subscribe(
-      (response: LoginResponse) => {
-        if (response.redirect) {
+      (response) => {
+        if (response.dashboard) {
           console.log('Login successful!', response);
           alert('Login successful!');
 
-          // ✅ Save user type in localStorage (optional)
+          // ✅ Save user type in localStorage (optional chaining prevents errors)
           if (response.userType) {
             localStorage.setItem('userType', response.userType);
           }
 
-          // ✅ Navigate to the dashboard in the SAME tab
-          this.router.navigate([response.redirect]);
+          // ✅ Navigate to dashboard in the same page
+          this.router.navigateByUrl(response.dashboard);
+
+          // ✅ Reload the page to update navbar
+          setTimeout(() => {
+            window.location.reload();
+          }, 500); 
         } else {
           alert(response.error || 'Invalid email or password!');
         }

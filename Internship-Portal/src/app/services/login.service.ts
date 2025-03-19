@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 interface LoginResponse {
   userType?: string;
-  redirect?: string; // ✅ Changed from 'dashboard' to 'redirect' to match backend
+  dashboard?: string;
   error?: string;
 }
 
@@ -12,7 +12,7 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class LoginService {
-  private apiUrl = 'http://localhost:8055/api/login'; // ✅ Ensure the correct backend URL
+  private apiUrl = 'http://localhost:8055/api/login'; // Updated backend URL
 
   constructor(private http: HttpClient) {}
 

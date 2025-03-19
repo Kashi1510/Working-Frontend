@@ -1,50 +1,21 @@
-<!-- First code -->
-
-<!-- <div class="container">
-    <h1>Created BY PAVAN B N</h1>
-  <h2>Student Dashboard</h2>
-  <button class="btn btn-primary" (click)="getInternships()">Get Internships</button>
-  
-  <h3>Available Internships</h3>
-  <div *ngFor="let internship of internships" class="card mt-3">
-      <div class="card-body">
-          <h5 class="card-title">{{ internship.title }}</h5>
-          <p class="card-text">{{ internship.company }}</p>
-          <p class="card-text">{{ internship.description }}</p>
-          <button class="btn btn-success" (click)="applyInternship(internship.id)">Apply</button>
-      </div>
-  </div>
-
-  <h3 class="mt-5">My Applications</h3>
-  <button class="btn btn-secondary" (click)="getApplications()">My Applications</button>
-  
-  <div *ngFor="let application of applications" class="card mt-3">
-      <div class="card-body">
-          <h5 class="card-title">{{ application.internship.title }}</h5>
-          <p class="card-text">Company: {{ application.internship.company }}</p>
-          <p class="card-text">Applied Date: {{ application.appliedDate }}</p>
-          <p *ngIf="application.status === 'Accepted'">Interview Date: {{ application.interviewDate }}</p>
-          <p *ngIf="application.status === 'Rejected'">Better luck next time!</p>
-      </div>
-  </div>
-</div> -->
-<div class="container">
+<!-- Befor changing  code -->
+<!-- <div class="container"> -->
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
       
       <div class="navbar-nav">
         <button class="nav-item nav-link btn" (click)="showInternships()">Available Internships</button>
         <button class="nav-item nav-link btn" (click)="showApplications()">My Applications</button>
       </div>
-    </nav>
+    </nav> -->
   
     <!-- Page Heading -->
   
     <!-- Available Internships Section -->
-    <div *ngIf="showInternshipsSection">
+    <!-- <div *ngIf="showInternshipsSection"> -->
       <!-- <button class="btn btn-primary mb-3" (click)="getInternships()">Get Internships</button> -->
   
-      <h3>Available Internships</h3>
+      <!-- <h3>Available Internships</h3>
       <div *ngFor="let internship of internships" class="card mt-3">
         <div class="card-body">
           <h5 class="card-title">{{ internship.title }}</h5>
@@ -53,14 +24,14 @@
           <button class="btn btn-success" (click)="applyInternship(internship.id)">Apply</button>
         </div>
       </div>
-    </div>
+    </div> -->
   
     <!-- My Applications Section -->
-    <div *ngIf="showApplicationsSection">
-      <h3 class="mt-5">Applications of companies you have applied for</h3>
+    <!-- <div *ngIf="showApplicationsSection">
+      <h3 class="mt-5">Applications of companies you have applied for</h3> -->
       <!-- <button class="btn btn-secondary mb-3" (click)="getApplications()">My Applications</button> -->
       
-      <div *ngFor="let application of applications" class="card mt-3">
+      <!-- <div *ngFor="let application of applications" class="card mt-3">
         <div class="card-body">
           <h5 class="card-title">{{ application.internship.title }}</h5>
           <p class="card-text">Company: {{ application.internship.company }}</p>
@@ -70,5 +41,145 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+  <!-- <div class="container"> -->
+    <!-- Navigation Bar -->
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between"> -->
+      
+      <!-- Left: Profile Section -->
+      <!-- <div class="navbar-nav">
+        <button class="nav-item nav-link btn" (click)="showProfile()">
+          <i class="fas fa-user-circle"></i> Profile
+        </button>
+      </div> -->
+  
+      <!-- Right: Internships & Applications -->
+      <!-- <div class="navbar-nav ml-auto">
+        <button class="nav-item nav-link btn" (click)="showInternships()">Available Internships</button>
+        <button class="nav-item nav-link btn" (click)="showApplications()">My Applications</button>
+        <button class="nav-item nav-link btn btn-danger" (click)="signOut()">Sign Out</button>
+      </div>
+    </nav> -->
+  
+    <!-- Dynamic Content -->
+    <!-- <div class="content mt-4"> -->
+      <!-- Profile Section (Hidden by default) -->
+      <!-- <div *ngIf="showProfileSection">
+        <h3>Student Profile</h3>
+        <p><strong>First Name:</strong> {{ student.firstName }}</p>
+        <p><strong>Last Name:</strong> {{ student.lastName }}</p>
+        <p><strong>SSLC Percentage:</strong> {{ student.sslcPercentage }}%</p>
+        <p><strong>PUC Percentage:</strong> {{ student.pucPercentage }}%</p>
+        <p><strong>Degree CGPA:</strong> {{ student.degreeCgpa }}</p>
+        <p><strong>Skills:</strong> {{ student.skills }}</p>
+      </div>
+   -->
+      <!-- Available Internships Section (Hidden by default) -->
+      <!-- <div *ngIf="showInternshipsSection">
+        <h3>Available Internships</h3>
+        <div *ngFor="let internship of internships" class="card mt-3">
+          
+          <div class="card-body">
+            <h5 class="card-title">{{ internship.title }}</h5>
+            <p class="card-text">{{ internship.company }}</p>
+            <p class="card-text">{{ internship.description }}</p>
+            <button class="btn btn-success" (click)="applyInternship(internship.id)">Apply</button>
+          </div>
+        </div>
+      </div> -->
+  
+      <!-- My Applications Section (Hidden by default) -->
+      <!-- <div *ngIf="showApplicationsSection">
+        <h3 class="mt-5">My Applications</h3>
+        <div *ngFor="let application of applications" class="card mt-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ application.internship.title }}</h5>
+            <p class="card-text">Company: {{ application.internship.company }}</p>
+            <p class="card-text">Applied Date: {{ application.appliedDate }}</p>
+            <p *ngIf="application.status === 'Accepted'">Interview Date: {{ application.interviewDate }}</p>
+            <p *ngIf="application.status === 'Rejected'">Better luck next time!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  
+  <div class="container">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+      
+      <!-- Left: Profile Section -->
+      <div class="navbar-nav">
+        <button class="nav-item nav-link btn" (click)="showProfile()">
+          <i class="fas fa-user-circle"></i> Profile
+        </button>
+      </div>
+  
+      <!-- Right: Internships & Applications -->
+      <div class="navbar-nav ml-auto">
+        <button class="nav-item nav-link btn" (click)="showInternships()">Available Internships</button>
+        <button class="nav-item nav-link btn" (click)="showApplications()">My Applications</button>
+        <button class="nav-item nav-link btn btn-danger" (click)="signOut()">Sign Out</button>
+      </div>
+    </nav>
+  
+    <!-- Dynamic Content -->
+    <div class="content mt-4">
+      
+      <!-- Profile Section (Hidden by default) -->
+      <div *ngIf="showProfileSection">
+        <h3>Student Profile</h3>
+        <p><strong>First Name:</strong> {{ student.firstName }}</p>
+        <p><strong>Last Name:</strong> {{ student.lastName }}</p>
+        <p><strong>SSLC Percentage:</strong> {{ student.sslcPercentage }}%</p>
+        <p><strong>PUC Percentage:</strong> {{ student.pucPercentage }}%</p>
+        <p><strong>Degree CGPA:</strong> {{ student.degreeCgpa }}</p>
+        <p><strong>Skills:</strong> {{ student.skills }}</p>
+      </div>
+  
+      <!-- Available Internships Section (Hidden by default) -->
+      <div *ngIf="showInternshipsSection">
+        <h3>Available Internships</h3>
+        <div *ngFor="let internship of internships" class="card mt-3">
+          
+          <div class="card-body">
+            <h5 class="card-title">{{ internship.title }}</h5>
+            <p class="card-text">{{ internship.companyName }}</p>
+            <p class="card-text">{{ internship.description }}</p>
+  
+            <!-- Apply button disabled if the student has already applied to this company -->
+            <button class="btn btn-success" 
+                    [disabled]="appliedCompanies.has(internship.company)" 
+                    (click)="applyInternship(internship.id)">
+              Apply
+            </button>
+  
+            <!-- Show message if the student has already applied -->
+            <p *ngIf="appliedCompanies.has(internship.company)" class="text-danger mt-2">
+              You have already applied for this company.
+            </p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- My Applications Section (Hidden by default) -->
+      <!-- <div *ngIf="showApplicationsSection">
+        <h3 class="mt-5">My Applications</h3>
+        <div *ngFor="let application of applications" class="application-card">
+          <p><strong>Company:</strong> {{ application.internship?.companyname || 'N/A' }}</p>
+          <p><strong>Applied Date:</strong> {{ application.appliedDate | date:'longDate' }}</p>
+          <p><strong>Interview Date:</strong> {{ application.interviewDate ? (application.interviewDate | date:'longDate') : 'Not Scheduled' }}</p>
+        </div> -->
+        <h2>My Applications</h2>
+
+<div *ngFor="let application of applications" class="application-card">
+  <p><strong>Company:</strong> {{ application.companyName || 'N/A' }}</p>
+  <p><strong>Applied Date:</strong> {{ application.appliedDate ? (application.appliedDate | date:'shortDate') : 'N/A' }}</p>
+  <p><strong>Interview Date:</strong> {{ application.interviewDate ? (application.interviewDate | date:'shortDate') : 'Not Scheduled' }}</p>
+</div>
+
+        
+      </div>
+    </div>
+  
   

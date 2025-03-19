@@ -9,7 +9,9 @@ export class InternshipService {
   private apiUrl = 'http://localhost:8055'; // Adjust the URL to match your backend API
 
   constructor(private http: HttpClient) {}
-
+  getInternship():Observable<any>  {
+    return this.http.get<any>(`${this.apiUrl}/internships`);
+  }
   // Get all internships
   getInternships(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/internships`);
@@ -31,6 +33,12 @@ export class InternshipService {
   rejectApplication(internshipId: number, applicationId: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/internships/${internshipId}/applications/${applicationId}/reject`, {});
   }
-
+   // ✅ Send message to student
+   sendMessageToStudent(studentId: number, message: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${studentId}/message`, { message });
+  }
+  getCompanyDetails(companyId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/internship/${companyId}`);
+  }
  
 }

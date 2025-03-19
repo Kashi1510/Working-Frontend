@@ -12,15 +12,15 @@ export class ApplicationService {
 
   constructor(private http: HttpClient) {}
 
-  applyForInternship(application: any): Observable<any> {
-    console.log(application);
-    return this.http.post(`${this.baseUrl}/apply`, application);
+  applyForInternship(applicationData: any): Observable<any> {
+    console.log(applicationData);
+    return this.http.post(`${this.baseUrl}/apply`, applicationData);
   }
 
   getApplicationsByStudent(studentId: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/student/${studentId}`);
   }
-  
+   
 
 
 }
