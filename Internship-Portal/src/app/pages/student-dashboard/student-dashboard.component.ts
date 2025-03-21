@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-//import { InternshipsService } from '../../services/internships.service';
 import { CommonModule } from '@angular/common';
 import { InternshipService } from '../../service/internship.service';
 import { ApplicationService } from '../../services/application.service';
-import { Router, RouterModule } from '@angular/router';
-import { error } from 'node:console';
-import { StudentService } from '../../services/student.service';
-
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -15,196 +11,89 @@ import { StudentService } from '../../services/student.service';
   styleUrl: './student-dashboard.component.css'
 })
 export class StudentDashboardComponent implements OnInit {
-// internships: any[] = [];
-// applications: any[] = [];
-// student: any = {}; // Holds student profile details
-// studentId: number = 1; // Assume logged-in student ID
-// showInternshipsSection: boolean = true;
-// showApplicationsSection: boolean = false;
-// showProfileSection: boolean = false;
+  internships: any[] = [];
+  applications: any[] = [];
+  studentId: number;
+  showInternshipsSection: boolean = true;
+  showApplicationsSection: boolean = false;
 
-// constructor(
-//   private internshipService: InternshipService,
-//   private applicationService: ApplicationService,
-//   private studentService: StudentService,
-//   private router: Router
-// ) {}
-
-// ngOnInit(): void {
-//   this.getInternships();
-//   this.getStudentProfile();
-// }
-
-// // Fetch Internships
-// getInternships(): void {
-//   this.internshipService.getInternships().subscribe(data => {
-//     this.internships = data;
-//   });
-// }
-
-// // Fetch Student Profile
-// getStudentProfile(): void {
-//   this.studentService.getStudentById(this.studentId).subscribe(data => {
-//     this.student = data;
-//   });
-// }
-
-// // Apply for an Internship
-// applyInternship(internshipId: number): void {
-//   const applicationData = {
-//     student: { id: this.studentId },
-//     internship: { id: internshipId },
-//     appliedDate: new Date()
-//   };
-//   this.applicationService.applyForInternship(applicationData).subscribe(() => {
-//     alert('Application submitted successfully');
-//     this.getApplications();
-//   });
-// }
-
-// // Fetch Student Applications
-// getApplications(): void {
-//   this.applicationService.getApplicationsByStudent(this.studentId).subscribe(data => {
-//     this.applications = data;
-//   });
-// }
-
-// // Toggle to show Profile Section
-// showProfile(): void {
-//   this.showProfileSection = true;
-//   this.showInternshipsSection = false;
-//   this.showApplicationsSection = false;
-// }
-
-// // Toggle to show Available Internships Section
-// showInternships(): void {
-//   this.showInternshipsSection = true;
-//   this.showApplicationsSection = false;
-//   this.showProfileSection = false;
-// }
-
-// // Toggle to show My Applications Section
-// showApplications(): void {
-//   this.showInternshipsSection = false;
-//   this.showApplicationsSection = true;
-//   this.showProfileSection = false;
-//   this.getApplications();
-// }
-
-// // Sign out and redirect to login page
-// signOut(): void {
-//   localStorage.removeItem('token'); // Remove authentication token
-//   this.router.navigate(['/login']); // Redirect to login page
-// }
-internships: any[] = [];
-applications: any[] = [];
-student: any = {}; // Holds student profile details
-studentId: number = 1; // Assume logged-in student ID
-showInternshipsSection: boolean = true;
-showApplicationsSection: boolean = false;
-showProfileSection: boolean = false;
-appliedCompanies: Set<string> = new Set(); // To track applied companies
-  getApplicationsByStudent: any={};
-
-
-constructor(
-  private internshipService: InternshipService,
-  private applicationService: ApplicationService,
-  private studentService: StudentService,
-  private router: Router
-) {}
-
-ngOnInit(): void {
-  this.getInternships();
-  this.getStudentProfile();
-  
-  this.getApplications(); // Fetch applications to update appliedCompanies
-  const studentId = 1; // Replace with actual logged-in student ID
-  this.getApplicationsByStudent(studentId);
-}
-
-
-// Fetch Internships
-getInternships(): void {
-  this.internshipService.getInternships().subscribe(data => {
-    this.internships = data;
-  });
-}
-
-// Fetch Student Profile
-getStudentProfile(): void {
-  this.studentService.getStudentById(this.studentId).subscribe(data => {
-    this.student = data;
-  });
-}
-
-// Fetch Student Applications
-getApplications(): void {
-  this.applicationService.getApplicationsByStudent(this.studentId).subscribe({
-    next:(data) => {
-      console.log("API Response:", data); // Debugging API Response
-      this.applications = data;
-      console.log("Applications",this.applications);
-    },
-    error:(error) => {
-      console.error("Error fetching applications:", error);
-    }}
-  );
-  
-}
-
-
-// Apply for an Internship
-applyInternship(internship: any): void {
-  if (this.appliedCompanies.has(internship.company)) {
-    alert('You have already applied for an internship at this company.');
-    return;
+  constructor(private internshipService: InternshipService, private applicationService: ApplicationService) {
+    this.studentId = Number(localStorage.getItem("studentId")); // ✅ Get the logged-in student ID from localStorage
   }
 
-  const applicationData = {
-    student: { id: this.studentId },
-    internship: { id: internship.id },
-    
-    appliedDate: new Date(),
-    interviewDate: new Date()
-  };
+  ngOnInit(): void {
+    this.getInternships(); // Load internships on initial load
+  }
 
-  this.applicationService.applyForInternship(applicationData).subscribe(() => {
-    alert('Application submitted successfully');
-    
-    // Add company to the applied companies set
-    this.appliedCompanies.add(internship.company);
-    
-    this.getApplications();
-  });
-}
+  getInternships(): void {
+    this.internshipService.getInternships().subscribe(data => {
+      this.internships = data.map((internship: { company: { name: any; }; }) => ({
+        ...internship,
+        companyName: internship.company?.name || 'Unknown Company' // Handle cases where company might be null
+      }));
+    });
+  }
 
-// Toggle to show Profile Section
-showProfile(): void {
-  this.showProfileSection = true;
-  this.showInternshipsSection = false;
-  this.showApplicationsSection = false;
-}
+  applyInternship(internshipId: number): void {
+    if (!this.studentId) {
+      alert("Student ID not found. Please log in again.");
+      return;
+    }
 
-// Toggle to show Available Internships Section
-showInternships(): void {
-  this.showInternshipsSection = true;
-  this.showApplicationsSection = false;
-  this.showProfileSection = false;
-}
+    const applicationData = {
+      student: { id: this.studentId },  // ✅ Use correct student ID
+      internship: { id: internshipId },
+      appliedDate: new Date(),
+      interviewDate: new Date()
+    };
 
-// Toggle to show My Applications Section
-showApplications(): void {
-  this.showInternshipsSection = false;
-  this.showApplicationsSection = true;
-  this.showProfileSection = false;
-  this.getApplications();
-}
+    this.applicationService.applyForInternship(applicationData).subscribe(() => {
+      alert('Application submitted successfully');
+      this.getApplications();
+    });
+  }
 
-// Sign out and redirect to login page
-signOut(): void {
-  localStorage.removeItem('token'); // Remove authentication token
-  this.router.navigate(['/login']); // Redirect to login page
-}
+  getApplications(): void {
+    if (!this.studentId) {
+      alert("Student ID not found. Please log in again.");
+      return;
+    }
 
+    this.applicationService.getApplicationsByStudent(this.studentId).subscribe((data: any[]) => {
+      this.applications = data
+        .filter(app => app.student?.id === this.studentId) // ✅ Filter by the logged-in student
+        .map(app => ({
+          id: app.id,
+          internship: {
+            title: app.internship?.title || "Unknown Title",
+            company: {
+              name: app.internship?.company?.name || "Unknown Company"
+            }
+          },
+          appliedDate: app.appliedDate ? new Date(app.appliedDate).toLocaleDateString() : "N/A",
+          status: app.status || "Pending",
+          interviewDate: app.status === "Accepted" && app.appliedDate
+            ? this.calculateInterviewDate(app.appliedDate)
+            : "Not Scheduled"
+        }));
+    });
+  }
+
+  // Calculate interview date (3 days after applied date)
+  calculateInterviewDate(appliedDate: string): string {
+    const applied = new Date(appliedDate);
+    applied.setDate(applied.getDate() + 3); // Add 3 days
+    return applied.toLocaleDateString();
+  }
+
+  showInternships(): void {
+    this.showInternshipsSection = true;
+    this.showApplicationsSection = false;
+  }
+
+  showApplications(): void {
+    this.showInternshipsSection = false;
+    this.showApplicationsSection = true;
+    this.getApplications(); // Fetch applications when switching to My Applications
+  }
 }

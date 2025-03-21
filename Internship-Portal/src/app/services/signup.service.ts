@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root' // ✅ Makes service available globally
+  providedIn: 'root' // Makes service available globally
 })
 export class SignService {
-  private apiUrl = 'http://localhost:8055/register'; // ✅ Update with your actual backend API URL
+  private apiUrl = 'http://localhost:8055/register'; //  Update with your actual backend API URL
 
   constructor(private http: HttpClient) {}
 

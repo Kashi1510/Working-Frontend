@@ -3,21 +3,21 @@
     
     <!-- Logo -->
     <div class="logo">
-      <img src="" alt="">
+      <img src="" alt="InternAspire Logo">
     </div>
 
     <h1>InternAspire</h1>
     <h2>Student & Employer Login</h2>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
-      
+    <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+
       <!-- Email Field -->
       <div class="form-group">
         <label for="email">Email Address</label>
         <input type="email" id="email" formControlName="email" placeholder="Enter your email">
-        <div *ngIf="submitted && f['email'].errors" class="error-message">
-          <small *ngIf="f['email'].errors?.['required']">Email is required.</small>
-          <small *ngIf="f['email'].errors?.['email']">Enter a valid email.</small>
+        <div *ngIf="submitted && loginForm.controls['email'].errors" class="error-message">
+          <small *ngIf="loginForm.controls['email'].errors?.['required']">Email is required.</small>
+          <small *ngIf="loginForm.controls['email'].errors?.['email']">Enter a valid email.</small>
         </div>
       </div>
 
@@ -25,16 +25,28 @@
       <div class="form-group">
         <label for="password">Password</label>
         <input type="password" id="password" formControlName="password" placeholder="Enter your password">
-        <div *ngIf="submitted && f['password'].errors" class="error-message">
-          <small *ngIf="f['password'].errors?.['required']">Password is required.</small>
-          <small *ngIf="f['password'].errors?.['minlength']">Password must be at least 6 characters.</small>
+        <div *ngIf="submitted && loginForm.controls['password'].errors" class="error-message">
+          <small *ngIf="loginForm.controls['password'].errors?.['required']">Password is required.</small>
+          <small *ngIf="loginForm.controls['password'].errors?.['minlength']">Password must be at least 6 characters.</small>
         </div>
+      </div>
+
+      <!-- Login Error Message -->
+      <div *ngIf="loginError" class="error-message">
+        <small>Invalid email or password.</small>
       </div>
 
       <!-- Submit Button -->
       <button type="submit" class="login-btn">Login</button>
 
-      
+      <!-- Navigation Links  -->
+      <div class="register-link">
+        <p>
+          <a routerLink="/signup">Student Register</a>&nbsp;&nbsp;
+          <a routerLink="/company-signup">Company Register</a>
+        </p>
+      </div>
+
     </form>
   </div>
 </div>
